@@ -9,8 +9,8 @@ const main = async (args: any, hre: HardhatRuntimeEnvironment) => {
 
   const data = prepareData(
     args.contract,
-    [],
-    []
+    ["address", "string", ],
+    [args.targetToken, args.recipient, ]
   );
   const to = getAddress("tss", hre.network.name);
   const value = parseEther(args.amount);
@@ -32,3 +32,5 @@ task("interact", "Interact with the contract", main)
   .addParam("contract", "The address of the withdraw contract on ZetaChain")
   .addParam("amount", "Amount of tokens to send")
   .addFlag("json", "Output in JSON")
+  .addParam("targetToken")
+  .addParam("recipient")

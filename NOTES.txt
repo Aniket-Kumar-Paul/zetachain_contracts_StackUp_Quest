@@ -1,0 +1,28 @@
+-- CREATING FIRST OMNICHAIN SMART CONTRACT AND TRANSFERING TOKENS FROM MUMBAI_TESTNET TO CONTRACT DEPLOYED ON ZETACHAIN --
+> npx hardhat omnichain MyContract (Create contract template)
+> npx hardhat account --save (Create new wallet account)
+
+- Fund wallet using faucet
+> npm install -g @zetachain/faucet-cli
+> npx hardhat balances (get wallet address & balances)
+> zetafaucet --drip --address <EVM ADDRESS> (get zeta tokens)
+
+- Compiling & Deploying contract 
+> npx hardhat compile --force
+> npx hardhat deploy --network zeta_testnet
+(contract address: 0x5Fc0Cbc4495ED3fe060CCe341088Cc83647E2AA4)
+
+- Token transfer transaction on mumbai_testnet (sending 0.1 tokens to the contract, gas fees is given by zeta tokens)
+> npx hardhat interact --contract <CONTRACT_ADDRESS> --amount 0.1 --network mumbai_testnet
+
+- To verify if txn was successfull
+> npx hardhat cctx <TXN_HASH>
+
+- TSS - Threshold Signature Scheme (Recipient address)
+----------------------------------------------------------------------------------------------------------------------------
+
+-- CREATING OMNICHAN SWAP CONTRACT --
+This omnichain contract will allow users to seamlessly transfer native tokens from a selected blockchain to ZetaChain and upon initiating a swap, these tokens will be swapped to a ZRC-20 representation of the token on another blockchain. Finally these tokens will be withdrawn to a recipient’s address on the target chain!
+
+> npx hardhat omnichain Swap targetToken:address recipient
+(The targetToken:address is likely the address of the token on the target chain that you want to swap. The recipient is likely the address on the target chain where the swapped tokens should be sent)
