@@ -26,3 +26,7 @@ This omnichain contract will allow users to seamlessly transfer native tokens fr
 
 > npx hardhat omnichain Swap targetToken:address recipient
 (The targetToken:address is likely the address of the token on the target chain that you want to swap. The recipient is likely the address on the target chain where the swapped tokens should be sent)
+
+- We'll perform following cross-chain swaps:
+1. From Polygon Mumbai Testnet to Goerli Testnet
+2. From Bitcoin to Polygon Mumbai Testnet
