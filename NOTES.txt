@@ -27,6 +27,17 @@ This omnichain contract will allow users to seamlessly transfer native tokens fr
 > npx hardhat omnichain Swap targetToken:address recipient
 (The targetToken:address is likely the address of the token on the target chain that you want to swap. The recipient is likely the address on the target chain where the swapped tokens should be sent)
 
+(contract address: 0xc0b96e3B5a1ae6E8502d0a871Fce6288d49441Cd)
+
 - We'll perform following cross-chain swaps:
-1. From Polygon Mumbai Testnet to Goerli Testnet
-2. From Bitcoin to Polygon Mumbai Testnet
+1. From Polygon Mumbai Testnet(EVM) to Goerli Testnet(EVM)
+    |- swapping native MATIC for a ZRC-20 representation of Goerli ETH which will then be withdrawn to a recipient address on the Goerli network
+    |- First we need ZRC-20 token address of GoerliETH (https://www.zetachain.com/docs/reference/testnet/, 0x13A0c5930C028511Dc02665E7285134B6d11A5f4)
+    |> npx hardhat interact --contract <CONTRACT_ADDRESS> --amount 0.1 --target-token <ZRC-20 TOKEN ADDRESS> --recipient <YOUR_EVM_ADDRESS> --network mumbai_testnet
+2. From Bitcoin(BTC) to Polygon Mumbai Testnet(EVM)
+    |- omnichain contract deployed on zetachain: 0xc0b96e3B5a1ae6E8502d0a871Fce6288d49441Cd
+    |- zrc-20 target token address on Polygon mumbai: 0x48f80608B672DC30DC7e3dbBd0343c5F02C738Eb
+    |- evm recipient address: 0x4f14524dF7998b65F0b66572ed442ae04931f3eB
+    |- Memo: <omnichain contract><zrc-20 target token address><evm recipient> (without 0x)
+    |    |- c0b96e3B5a1ae6E8502d0a871Fce6288d49441Cd48f80608B672DC30DC7e3dbBd0343c5F02C738Eb4f14524dF7998b65F0b66572ed442ae04931f3eB
+    |> npx hardhat send-btc --amount 0.000001 --recipient <YOUR BITCOIN ADDRESS> --memo <MEMO_VALUE>
